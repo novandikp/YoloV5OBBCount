@@ -177,6 +177,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
             im0 = annotator.result()
             n = (det[:, -1] == 0).sum()  # detections per class
             if n > 0:
+                #add background behind the text
+                im0 = cv2.rectangle(im0, (0, 0), (im0.shape[1], 30), (0, 0, 0), -1)
                 # make text size more bigger
                 im0 = cv2.putText(im0, f'{n} {names[0]}', (im0.shape[1] - 100, 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
             if view_img:
