@@ -177,10 +177,10 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
             im0 = annotator.result()
             n = (det[:, -1] == 0).sum()  # detections per class
             if n > 0:
-                #add background behind the text
-                im0 = cv2.rectangle(im0, (0, 0), (im0.shape[1], 30), (0, 0, 0), -1)
-                # make text size more bigger
-                im0 = cv2.putText(im0, f'{n} {names[0]}', (im0.shape[1] - 100, 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+                #add background behind the text to make it more readable
+                im0 = cv2.copyMakeBorder(im0, 0, 0, 0, 0, cv2.BORDER_CONSTANT, value=(0, 0, 0))
+                # add background black behind text wrap content
+                im0 = cv2.putText(im0, f'{n} {names[0]}', (im0.shape[1] - 100, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
             if view_img:
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
