@@ -177,7 +177,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
             im0 = annotator.result()
             n = (det[:, -1] == 0).sum()  # detections per class
             if n > 0:
-                im0 = cv2.putText(im0, f'{n} {names[0]}', (im0.shape[1] - 100, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
+                # make text size more bigger
+                im0 = cv2.putText(im0, f'{n} {names[0]}', (im0.shape[1] - 100, 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
             if view_img:
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
